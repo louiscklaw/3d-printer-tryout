@@ -1,0 +1,8 @@
+[submodule "_ref/first_layer_test"]
+	path = _ref/first_layer_test
+	url = https://github.com/louiscklaw/first_layer_test.git
+	shallow = true
+[submodule "_ref/Voron-2"]
+	path = _ref/Voron-2
+	url = https://github.com/VoronDesign/Voron-2.git
+	shallow = true
