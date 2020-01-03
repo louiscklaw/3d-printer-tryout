@@ -1,0 +1,29 @@
+dist: bionic
+
+script:
+  - hostname
+
+# cache:
+#   directories:
+#     - $TRAVIS_BUILD_DIR/_ref_design
+
+after_success:
+  - id
+  - sudo apt update
+  - sudo apt install -y python3 python3-pip python3-dev python3-wheel python3-setuptools
+  - pip3 install --user pipenv
+  - pipenv sync
+  - pipenv run python3 _utils/merge.py
+  - pipenv run python3 _utils/shallow_submodule.py
+
+notifications:
+  slack:
+    secure: "vCclmPgZ+KeHHXuWwVUdEIiRnBzKuO+w5eAFTpsTQY7oWCKxhklNaUsxjsEISqn4vxC3r/TEORukVlmYPWoon/LHVq2x8UTlggXKdHTntgfQV5LQc912yenYH5OpfN59EFHzyTWEhv19ajg1ch9PNYOksjcaf3bwbKb37IY+tNczkoeoOnWZ2SpTbN9wc4UdLLu129LZojVkYAH4B1k+W0YtxDQ9ygieh+D5CySTqTfXcUgBsSb/CzvNAfMN/DfQjtukyJnmVgxj+8V4uA3HCeClMQWmm6yIwbV0CtgjFhOZtbKrNFqmOhLCAjK7Eg4HMjjLT7BaIpYoIlv6WkLcoeY8moM1ayD+NNy0/9/PIp0W5AlRQ7HsTZWjCu6D9qhT9ODsOwNhZndUx2Yn92G0eSVMWPb39ndZ75syDMcwObVHmpY9yFbOjrbNBSaliLnsEFiIeWEC+zATn1EmIyFS9O4pZ7LYA4H4PUau8mXsZVakwRmP8JumWJbP19ZXBsfNoM7O4LNCGZkrTqLVbyhGB965V9WpOcai35QOPpbGfA5Uf1vJDY7kJKnIx4Hrwnm4Ziwftcc5SGFylqcdl/fImuU6bW0Vc5kDO5HlqSYTKeihx8kOKJjVTt9o0dLjwy5UM9ozHJpwEw8al+NWrFEL2UIsx6tQSmQeKiiraDDBU6Y="
+
+env:
+  global:
+    # SLACK_TOKEN
+    - secure: "TgHU5PESrqGkmslGf4RL+JXMkvoCADaHb3O+jXhO6C7k7ogZhH+KIsL6I6sLFoc8d7cKc6KJvOwyzJFCPHzTfxFVtpYtv1ij6OiJ/3cCBG4CMOWij8VvCtilwncqjacdMewVHaLftwNFMCGkG7b0qZVGEVxmlPjWoOXkD59qN7lC460fhoc8NO2V2havgL5C/jE2vfd7dqJADDTtImz2d2PI7gnPA1mwKF8RTnxXy9rFnKNOqPjCBJLiPbbbKFHnzMUu+rk+qHlHb6wC7YFogrBgzJUZD1Trm6czfNfZG4DlV5sieNheTQ4dK8mOpGcm/N7gD6bNVolqwF6H8L+mle4H+HdQvuzGgjRggKviJgQnon28mGwuXT9lZ5J/bUz+rsBe4yQ4PrB5XkEpKHeRHibBK43N1A4NlWoGbxi2Qi8gk/+O0qki8gzawO/vBkidVEzzXncVds0xx++L4seHLtAjsUn80aeiJL4xJTcAHapjiTgigBMZcvJxI9TMFwTfsCbA31ys4IVZaPhoYwoHjTNebUDQxjiaB3b/lJY/IUj+tDYjUuCJ7Nn0mbSCYw1b4LtguQnd75ZA3DsUAQpcR4IdFin/4qnfAax5TiZ0RAuYuBgzJN16Mt5s4sCyR4M8ISjfhoEJzBomx3dBE42as8HXq9NOOdbO7LQh0A5iScI="
+
+    # GITHUB_TOKEN
+    - secure: "KJXYTRpqZdVENMFl50JD142u4Z24Bfvx0vJI4JEJ36LfsO+gTOM8N0reIU6Pg8bqRuESFvOx/zi91Q1rAPctnpjmBbX/gna5kNmUEn7SpAKIvEAvshqubMhEgEi+uWEOTDUAsHhcO+zEdLOg2XaqbMcCp57FK/mVWRfBnbjeWb3q48MMdraWhOaD1blDkX9wfQTHWwCsFcFDIeOmOyCNwVO/4rUAeVliduDzg849BwNc7HZBFXIEgsFnPGeRYE6pRnmnwbwlj8s1rdR7WGi6uAOEjd2oc5l4RYY1BfNC9j+majVHKVK2NIGBGNs7kzk2mX43H9QMx+kt1ijyrDBH5pu44e3T3XLgRI9SfKBVasSZ/fxcfWiqPk2ZWikZI6l6khSHtfTqIcTvb9q3ChWPBV9DPQNXAasHKff7yK0dKe/tJPrSUwaikURik33qZwcrk8JUZCpxa8cxs0uCv1+mhxt1rPDFwL8Oi/xHcm3pBeashB+wNBpt63Qfdg1TH9rtwVthGFdeEscVEbdIqAO7C+FWuX7143xTuOa14yoFGoHy/QtamG02u9vWmIfePn1G5K+6XrFvZ6/jgzGvulEVLkw5nDqiFIL93obkeK0W4mGDLOP2lcWD/i6xN4JwjfQQH9yAuauArpxcCimmXfhiLIh+dU7hQWu9T77qKzpbKoA="
